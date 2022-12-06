@@ -32,11 +32,12 @@ public class CartDBInMemory {
         // Create a filter to filter files ending with .db and obtain them
         File[] filteredFiles = f.listFiles(new FilenameFilter() {
             // Override is automatically generated when typing 'accepts'
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".db");
 
-            };
+            @Override
+            public boolean accept(File dir, String filename) {
+                return filename.endsWith(".db");
+
+            }
         });
 
         // if there are no files, return
@@ -51,6 +52,11 @@ public class CartDBInMemory {
         }
         
     }
+    
+     /**
+     * @param f
+     * @return
+     */
 
     public ArrayList<String> readFile(File f) {
 

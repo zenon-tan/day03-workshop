@@ -162,6 +162,7 @@ public class ShoppingCartDB {
             for (String item : this.db.userMap.get(this.currentUser)) {
                 fw.write(item +"\n");
             }
+            System.out.println("Shopping Cart saved for user: " + this.currentUser);
             fw.flush();
             fw.close();
         } catch (IOException e) {

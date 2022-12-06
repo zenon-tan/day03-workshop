@@ -39,10 +39,9 @@ public class ShoppingCartDB {
 
     public ShoppingCartDB(String baseFolder) { // Constructor when the user specifies a base folder
         this.baseFolder = baseFolder;
+        this.setupFiles();
         this.db = new CartDBInMemory(this.baseFolder);
         // When instance is created, run the setupFiles to create a directory (or skip if folder exists)
-        this.setupFiles();
-
 
     }
 
@@ -72,15 +71,17 @@ public class ShoppingCartDB {
         Scanner sc = new Scanner(System.in);
 
         while(!isQuit) {
+            line = sc.nextLine().trim();
 
             System.out.printf("> ");
             // Get the input from the console
-            line = sc.nextLine().trim();
+
             System.out.println(">>> " + line);
 
             if(line.equalsIgnoreCase(EXIT)) {
                 System.out.println("Exiting...");
                 isQuit = true;
+            }
 
             // Validate commands by checking with the list of constants
             if(!this.validateInput(line)) {
@@ -88,8 +89,6 @@ public class ShoppingCartDB {
             } else {
                 System.out.println("Processing: " + line);
                 this.processInput(line);
-            }
-
             }
 
 
@@ -185,6 +184,8 @@ public class ShoppingCartDB {
             for(String item : this.db.userMap.get(this.currentUser)) {
                 fw.write(item + "\n");
             }
+
+            System.out.println("Shopping Cart saved for user: " + this.currentUser);
 
             fw.flush();
             fw.close();
